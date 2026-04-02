@@ -285,7 +285,7 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
  	.ndo_start_xmit		= airoha_dev_xmit,
  	.ndo_get_stats64        = airoha_dev_get_stats64,
  	.ndo_set_mac_address	= airoha_dev_set_macaddr,
-@@ -3148,12 +3326,9 @@ static int airoha_alloc_gdm_port(struct
+@@ -3148,12 +3301,9 @@ static int airoha_alloc_gdm_port(struct
  	dev->ethtool_ops = &airoha_ethtool_ops;
  	dev->max_mtu = AIROHA_MAX_MTU;
  	dev->watchdog_timeo = 5 * HZ;
@@ -298,7 +298,7 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
 +	dev->hw_features = AIROHA_HW_FEATURES | NETIF_F_LRO;
 +	dev->features |= AIROHA_HW_FEATURES;
 +	dev->vlan_features = AIROHA_HW_FEATURES;
- 	dev->dev.of_node = np;
+ 	device_set_node(&dev->dev, of_fwnode_handle(np));
  	SET_NETDEV_DEV(dev, eth->dev);
  
 --- a/drivers/net/ethernet/airoha/airoha_eth.h
